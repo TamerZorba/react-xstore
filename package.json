@@ -2,9 +2,10 @@
   "name": "react-xstore",
   "version": "1.0.0",
   "description": "simple yet powerful global state management for React",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build"
   },
   "repository": {
     "type": "git",
@@ -22,5 +23,16 @@
   "bugs": {
     "url": "https://github.com/TamerZorba/react-xstore/issues"
   },
-  "homepage": "https://github.com/TamerZorba/react-xstore#readme"
+  "homepage": "https://github.com/TamerZorba/react-xstore#readme",
+  "babel": {
+    "presets": [
+      "babel-preset-es2015",
+      "babel-preset-react"
+    ]
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1"
+  }
 }
