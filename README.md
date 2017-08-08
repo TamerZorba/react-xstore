@@ -6,41 +6,46 @@ Simple yet powerful global state management for React, Inspired by Vuex and Redu
 `npm install --save react-global-state`
 
 ## API
+  you can access the store from any component from props `this.props.store ('myStore')`.
+  * `state` current store state
   * `commit` used to call mutations.
   * `dispatch` used to call actions.
   * `setState` for manual state mutation.
 
 ## Usage
 
-Wrap your components with `Connect`. and the store will be available as the `store` props.
+Wrap your components with `Connect`. and the store will be available as the `store` in props.
 
 ### Example 1 - simple counter
 
-#### Init Store, you should import it at the main app loader
+Init Store, you should import it at the main app loader
 
+```javascript
     import {Store} from 'react-xstore';
 
     new Store ({
       name: 'myStore',
-      state: {
+      state: { // default state for current store
         counter: 25,
       },
-      mutations: {
+      mutations: { // called by commit() function
         plus (append) {
           this.counter = this.counter ? this.counter + append : 60;
         },
       },
       actions: {
-        plusAsync (append) {
+        plusAsync (append) { // called by dispatch() function
           setTimeout (() => {
             this.commit ('plus', append);
           }, 500);
         },
       },
     });
+```
 
-### access store from any component like this
+access store from any component like this
 
+```javascript
     import React, {Component} from 'react';
     import {Connect} from 'react-xstore';
 
@@ -71,11 +76,13 @@ Wrap your components with `Connect`. and the store will be available as the `sto
     }
 
     export default Connect (First);
+```
 
 ### Example 2 - advence auth manager
 
-#### Init Store, and import it at the main app loader
+Init Store, and import it at the main app loader
 
+```javascript
     import {Store} from 'react-xstore';
 
     const LOGIN = 'LOGIN';
@@ -116,10 +123,11 @@ Wrap your components with `Connect`. and the store will be available as the `sto
         },
       },
     });
+```
 
+component example usage
 
-### component example usage
-
+```javascript
     import React, {Component} from 'react';
     import {Connect} from 'react-xstore';
 
@@ -148,11 +156,11 @@ Wrap your components with `Connect`. and the store will be available as the `sto
     }
 
     export default Connect (Login);
+```
 
 # Contributing
 Thank you for considering contributing! Fork the repo then after you complete your awesome feature, make a pull request and we will be glad to accept after test.
 
 ## License
-
 This code is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
  
