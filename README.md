@@ -1,9 +1,9 @@
 # React xStore
-Simple yet powerful global state management for React, Inspired by Vuex and Redux, Support's Async mutations by (Actions), see examples for more informations.
+Simple yet powerful global state management for React, Inspired by Vuex, Redux and react-global-store, Support's Async mutations by (Actions), see examples for more informations.
 
 ## Installation
 
-`npm install --save react-global-state`
+`npm install --save react-xstore`
 
 ## API
   you can access the store from any component from props `this.props.store ('myStore')`.
