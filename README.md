@@ -5,16 +5,16 @@ Simple yet powerful global state management for React, Inspired by Vuex, Redux a
 
 `npm install --save react-xstore`
 
-## API
-  you can access the store from any component from props `this.props.store ('myStore')`.
+## Usage
+
+Wrap your components with `Connect`. and the store will be available as `store` in props `this.props.store ('myStore')`
+then you can access store api from any component you wrap with.
+
   * `state` current store state
   * `commit` used to call mutations.
   * `dispatch` used to call actions.
   * `setState` for manual state mutation.
 
-## Usage
-
-Wrap your components with `Connect`. and the store will be available as the `store` in props.
 
 ### Example 1 - simple counter
 
