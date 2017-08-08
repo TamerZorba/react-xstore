@@ -1,0 +1,26 @@
+{
+  "name": "react-xstore",
+  "version": "1.0.0",
+  "description": "simple yet powerful global state management for React",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TamerZorba/react-xstore.git"
+  },
+  "keywords": [
+    "react",
+    "store",
+    "state",
+    "managment",
+    "global"
+  ],
+  "author": "Tamer Zorba",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TamerZorba/react-xstore/issues"
+  },
+  "homepage": "https://github.com/TamerZorba/react-xstore#readme"
+}
