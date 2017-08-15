@@ -1,4 +1,11 @@
 # React xStore
+
+[![NPM version][npm-badge]][npm-url]
+[![Downloads][download-badge]][npm-url]
+[![Build Status][build-badge]][build-url]
+[![JavaScript Style Guide][standard-badge]][standard-url]
+[![License][license-badge]][MIT License]
+
 Simple yet powerful global state management for React, Inspired by Vuex, Redux and react-global-store, Support's Async mutations by (Actions), see examples for more informations.
 
 ## Installation
@@ -7,13 +14,14 @@ Simple yet powerful global state management for React, Inspired by Vuex, Redux a
 
 ## Usage
 
-Wrap your components with `Connect`. and the store will be available as `store` in props `this.props.store ('myStore')`
+Wrap your components with `Connect` and the store will be available as `store` in props `this.props.store ('myStore')`
 then you can access store api from any component you wrap with.
 
-  * `state` current store state
+  * `state` current store state.
   * `commit` used to call mutations.
   * `dispatch` used to call actions.
   * `setState` for manual state mutation.
+  * `computed` combine states or shrink object by computed property.
 
 
 ### Example 1 - simple counter
@@ -40,6 +48,11 @@ Init Store, you should import it at the main app loader
           }, 500);
         },
       },
+      computed: {
+        x5 () {
+          return this.counter * 5;
+        },
+      },
     });
 ```
 
@@ -51,10 +64,10 @@ access store from any component like this
 
     class First extends Component {
       render () {
-        const {state, setState, commit, dispatch} = this.props.store ('myStore');
+        const {state, computed, setState, commit, dispatch} = this.props.store ('myStore');
         return (
           <div>
-            Counter is {state.counter} <br />
+            Counter is {state.counter} and x5 is {computed.x5}<br />
             <button
               onClick={() => {
                 setState ({
@@ -158,9 +171,19 @@ component example usage
     export default Connect (Login);
 ```
 
-# Contributing
+## Contributing
 Thank you for considering contributing! Fork the repo then after you complete your awesome feature, make a pull request and we will be glad to accept after test.
 
 ## License
 This code is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
- 
+
+[npm-url]: https://npmjs.org/package/react-xstore
+[build-url]: https://unpkg.com/react-xstore
+[standard-url]: https://standardjs.com
+[MIT License]: http://opensource.org/licenses/MIT
+
+[npm-badge]: https://img.shields.io/npm/v/react-xstore.svg
+[download-badge]: http://img.shields.io/npm/dm/react-xstore.svg
+[build-badge]: https://img.shields.io/badge/build-passing-green.svg
+[standard-badge]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
+[license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
