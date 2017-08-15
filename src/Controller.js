@@ -84,4 +84,23 @@ export default class Controller {
     }
     return false;
   }
+
+  /**
+   * handle computed properties
+   * 
+   * @param {any} action 
+   * @returns 
+   * @memberof Controller
+   */
+  getComputed (store, state, mutation) {
+    let computed = {};
+
+    // TODO: run only computed property by mutation (proxy)
+    Store.stores[store].computed &&
+      Object.keys (Store.stores[store].computed).forEach (current => {
+        computed[current] = Store.stores[store].computed[current].call (state);
+      });
+
+    return computed;
+  }
 }

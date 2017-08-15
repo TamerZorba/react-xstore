@@ -20,10 +20,21 @@ export default function Connect (Component) {
       super (props);
       let state = {
         state: {},
+        computed: {},
       };
-      Object.keys (Store.stores).forEach (e => {
+
+      let stores = Object.keys (Store.stores);
+
+      // update stores with current state
+      stores.forEach (e => {
         state.state[e] = Store.stores[e].state || {};
       });
+
+      // update computed if exists with previously updated state
+      stores.forEach (e => {
+        state.computed[e] = controller.getComputed (e, state.state[e]);
+      });
+
       this.state = state;
     }
 
@@ -51,6 +62,9 @@ export default function Connect (Component) {
       let obj = this.state;
       obj.state[store] = Object.assign ({}, obj.state[store], value);
 
+      let computed = controller.getComputed (store, obj.state[store], value);
+      obj.computed[store] = Object.assign ({}, obj.computed[store], computed);
+
       this.setState (obj);
     }
 
@@ -63,6 +77,7 @@ export default function Connect (Component) {
       let store = function (store) {
         return {
           state: this.state.state[store],
+          computed: this.state.computed[store],
           commit: controller.commit.bind ({
             controller,
             store,
