@@ -61,6 +61,7 @@ export default function Connect (Component) {
     handleChange (store, value) {
       let obj = this.state;
       obj.state[store] = Object.assign ({}, obj.state[store], value);
+      Store.stores[store].state = obj.state[store];
 
       let computed = controller.getComputed (store, obj.state[store], value);
       obj.computed[store] = Object.assign ({}, obj.computed[store], computed);
