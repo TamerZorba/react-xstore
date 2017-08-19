@@ -3,7 +3,7 @@ const {BannerPlugin} = require ('webpack');
 const UglifyJSPlugin = require ('uglifyjs-webpack-plugin');
 
 const LIBRARY_NAME = 'react-xstore';
-const LIBRARY_VERSION = '1.1.0';
+const LIBRARY_VERSION = '1.1.1';
 const LIBRARY_BANNER = `React xStore JavaScript Library v${LIBRARY_VERSION}
 https://github.com/tamerzorba/react-xstore
 
