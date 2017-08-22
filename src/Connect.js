@@ -10,7 +10,7 @@ const controller = new Controller ();
  * @func Connect
  * @author Tamer Zorba <abo.al.tot@gmail.com>
  */
-export default function Connect (Component) {
+export default function Connect (Component, linkedStores = []) {
   return class GlobalState extends React.Component {
     /**
      * Creates an instance of GlobalState.
@@ -27,6 +27,9 @@ export default function Connect (Component) {
 
       // update stores with current state
       stores.forEach (e => {
+        if (linkedStores.length && !linkedStores.includes (e)) {
+          return;
+        }
         state.state[e] = Store.stores[e].state || {};
       });
 
@@ -75,24 +78,71 @@ export default function Connect (Component) {
      * @returns 
      */
     render () {
-      let store = function (store) {
-        return {
-          state: this.state.state[store],
-          computed: this.state.computed[store],
-          commit: controller.commit.bind ({
-            controller,
-            store,
-            component: this,
-          }),
-          dispatch: controller.dispatch.bind ({
-            controller,
-            store,
-            component: this,
-          }),
-          setState: controller.setState.bind ({controller, store}),
-        };
+      const that = this;
+
+      const handler = {
+        get (target, prop) {
+          let store = target.store;
+          if (!Object.keys (that.state.state).includes (store)) {
+            let stores = Object.keys (Store.stores);
+            let err;
+            if (stores.includes (store)) {
+              err = `Store: '${store}' exists, but not linked with current component`;
+            } else {
+              err = `Store: '${store}' not exists in the app.`;
+            }
+            console.error (new Error (err));
+          }
+
+          switch (prop) {
+            case 'state':
+              return that.state.state[store];
+              break;
+            case 'computed':
+              return that.state.computed[store];
+              break;
+            case 'commit':
+              return controller.commit.bind ({
+                controller,
+                store,
+                component: that,
+              });
+              break;
+            case 'dispatch':
+              return controller.dispatch.bind ({
+                controller,
+                store,
+                component: that,
+              });
+              break;
+            case 'setState':
+              return controller.setState.bind ({controller, store});
+              break;
+            default:
+              return that.state.state[store][prop];
+          }
+        },
+        // set the store value
+        set (obj, prop, value) {
+          let store = obj.store;
+          let setStore = controller.setState.bind ({controller, store});
+          setStore ({[prop]: value});
+
+          return true;
+        },
       };
-      return <Component {...this.props} store={store.bind (this)} />;
+
+      /**
+       * first proxy to get the store name
+       */
+      var proxy = new Proxy (
+        {},
+        {
+          get: (target, store) => new Proxy ({store}, handler),
+        }
+      );
+
+      return <Component {...this.props} store={proxy} />;
     }
   };
 }

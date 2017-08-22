@@ -14,14 +14,18 @@ Simple yet powerful global state management for React, Inspired by Vuex, Redux a
 
 ## Usage
 
-Wrap your components with `Connect` and the store will be available as `store` in props `this.props.store ('myStore')`
+Wrap your components with `Connect` and the store will be available as `store` in props `this.props.store.myStore`
 then you can access store api from any component you wrap with.
-
-  * `state` current store state.
-  * `commit` used to call mutations.
-  * `dispatch` used to call actions.
-  * `setState` for manual state mutation.
-  * `computed` combine states or shrink object by computed property.
+  
+  * access store `let mys = this.props.store.myStore`.
+  * get current store state `mys.state.variable`.
+  * call mutations `mys.commit('mutation', ...params)`.
+  * call actions for async code `mys.dispatch('action', ...params)`.
+  * manual state mutation `mys.setState(variable: 'hello')`.
+  * combine states or shrink object by computed property `mys.computed.variables`.
+  * magic state getter `mys.variable`.
+  * magically update state value by proxy `mys.variable = 'hello'`.
+  * link store with your component, you can add stores as secound parameter or leave it blank to init all stores to the component `Connect(Component, ['store1', 'store2'])`.
 
 
 ### Example 1 - simple counter
@@ -64,7 +68,7 @@ access store from any component like this
 
     class First extends Component {
       render () {
-        const {state, computed, setState, commit, dispatch} = this.props.store ('myStore');
+        const {state, computed, setState, commit, dispatch} = this.props.store.myStore;
         return (
           <div>
             Counter is {state.counter} and x5 is {computed.x5}<br />
@@ -88,7 +92,7 @@ access store from any component like this
       }
     }
 
-    export default Connect (First);
+    export default Connect (First, ['myStore']); // access wanted stores only, for better performance
 ```
 
 ### Example 2 - advence auth manager
@@ -146,7 +150,7 @@ component example usage
 
     class Login extends Component {
       render () {
-        const {state, dispatch} = this.props.store ('auth');
+        const {state, dispatch} = this.props.store.auth;
         return (
           <div>
             {state.isLoggedIn
@@ -168,7 +172,14 @@ component example usage
       }
     }
 
-    export default Connect (Login);
+    export default Connect (Login); // access all stores
+```
+
+magic setter
+
+```javascript
+      let auth = this.props.store.auth;
+      auth.username = 'Tamer Zorba';
 ```
 
 ## Contributing
