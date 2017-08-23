@@ -21,11 +21,11 @@ then you can access store api from any component you wrap with.
   * get current store state `mys.state.variable`.
   * call mutations `mys.commit('mutation', ...params)`.
   * call actions for async code `mys.dispatch('action', ...params)`.
-  * manual state mutation `mys.setState(variable: 'hello')`.
+  * manual state mutation `mys.setState({variable: 'hello'})`.
   * combine states or shrink object by computed property `mys.computed.variables`.
   * magic state getter `mys.variable`.
   * magically update state value by proxy `mys.variable = 'hello'`.
-  * link store with your component, you can add stores as secound parameter or leave it blank to init all stores to the component `Connect(Component, ['store1', 'store2'])`.
+  * link store with your component, you can add stores as second parameter or leave it blank to init all stores to the component `Connect(Component, ['store1', 'store2'])`.
 
 
 ### Example 1 - simple counter
@@ -95,7 +95,7 @@ access store from any component like this
     export default Connect (First, ['myStore']); // access wanted stores only, for better performance
 ```
 
-### Example 2 - advence auth manager
+### Example 2 - advance auth manager
 
 Init Store, and import it at the main app loader
 
@@ -175,7 +175,7 @@ component example usage
     export default Connect (Login); // access all stores
 ```
 
-magic setter
+update store by magic setter
 
 ```javascript
       let auth = this.props.store.auth;

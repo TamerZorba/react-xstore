@@ -1,6 +1,6 @@
 {
   "name": "react-xstore",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "simple yet powerful global state management for React",
   "main": "dist/bundle.js",
   "scripts": {
