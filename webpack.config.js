@@ -1,10 +1,13 @@
 const path = require ('path');
 const {BannerPlugin} = require ('webpack');
 const UglifyJSPlugin = require ('uglifyjs-webpack-plugin');
+const lib = require ('./package.json');
 
-const LIBRARY_NAME = 'react-xstore';
-const LIBRARY_VERSION = '2.0.0';
+const LIBRARY_NAME = lib.name;
+const LIBRARY_VERSION = lib.version;
+const LIBRARY_DESCRIPTION = lib.description;
 const LIBRARY_BANNER = `React xStore JavaScript Library v${LIBRARY_VERSION}
+${LIBRARY_DESCRIPTION}
 https://github.com/tamerzorba/react-xstore
 
 Copyright ©2017 Tamer Zorba and other contributors
