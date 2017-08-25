@@ -8,6 +8,8 @@
 
 Simple yet powerful global state management for React, Inspired by Vuex, Redux and react-global-store, Support's Async mutations by (Actions), see examples for more informations.
 
+[![NPM][npm-nodi]][npm-url]
+
 ## Installation
 
 `npm install --save react-xstore`
@@ -26,6 +28,8 @@ then you can access store api from any component you wrap with.
   * magic state getter `mys.variable`.
   * magically update state value by proxy `mys.variable = 'hello'`.
   * link store with your component, you can add stores as second parameter or leave it blank to init all stores to the component `Connect(Component, ['store1', 'store2'])`.
+
+ and you can access the stores externally by `import {External as xStore} from 'react-xstore';` then fetch store like `xStore.myStore` and now you have all internal methods and states available, you can commit, dispatch, setStore or update state magically.
 
 
 ### Example 1 - simple counter
@@ -198,3 +202,4 @@ This code is open-sourced software licensed under the [MIT license](http://opens
 [build-badge]: https://img.shields.io/badge/build-passing-green.svg
 [standard-badge]: https://img.shields.io/badge/code_style-standard-brightgreen.svg
 [license-badge]: https://img.shields.io/badge/license-MIT-blue.svg
+[npm-nodi]: https://nodei.co/npm/react-xstore.png?downloads=true&downloadRank=true&stars=true
