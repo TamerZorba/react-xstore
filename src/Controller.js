@@ -4,7 +4,7 @@ import Store from './Store';
  * @class Controller
  * @author Tamer Zorba <abo.al.tot@gmail.com>
  */
-export default class Controller {
+class Controller {
   /**
    * Creates an instance of Controller.
    * @memberof Controller
@@ -104,3 +104,7 @@ export default class Controller {
     return computed;
   }
 }
+
+const controller = new Controller ();
+
+export default controller;
